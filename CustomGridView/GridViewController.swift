@@ -1,9 +1,5 @@
-//
-//  CollectionViewController.swift
-//  CustomCollectionLayout
-//
-//  Created by JOSE MARTINEZ on 15/12/2014.
-//  Copyright (c) 2014 brightec. All rights reserved.
+//  Created by Amine Chaouki on 10/05/15.
+//  Copyright (c) 2015 chaouki. All rights reserved.
 //
 
 import UIKit
@@ -29,21 +25,21 @@ public class TitleGridViewCell: UICollectionViewCell {
     }
 }
 
-public class CustomGridViewController: UICollectionViewController {
+public class GridViewController: UICollectionViewController {
     let titleCellIdentifier = "TitleCellIdentifier"
     let contentCellIdentifier = "ContentCellIdentifier"
 
-    public var dataSource: CustomGridViewLayoutDataSource!
+    public var dataSource: GridViewLayoutDataSource!
 
 
-    @IBOutlet weak var layout: CustomGridViewLayout!
+    @IBOutlet weak var layout: GridViewLayout!
 
 
     public override func viewDidLoad() {
         super.viewDidLoad()
         
 
-        layout = collectionViewLayout as! CustomGridViewLayout
+        layout = collectionViewLayout as! GridViewLayout
         layout.dataSource = dataSource
 
     }

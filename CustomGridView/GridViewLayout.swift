@@ -1,20 +1,15 @@
-//
-//  CustomCollectionViewLayout.swift
-//  CustomCollectionLayout
-//
-//  Created by JOSE MARTINEZ on 15/12/2014.
-//  Copyright (c) 2014 brightec. All rights reserved.
-//
+//  Created by Amine Chaouki on 10/05/15.
+//  Copyright (c) 2015 chaouki. All rights reserved.
 
 import UIKit
 
 //Section = row, item = column
 
-public class CustomGridViewLayout: UICollectionViewLayout {
+public class GridViewLayout: UICollectionViewLayout {
 
     var itemAttributes = [[UICollectionViewLayoutAttributes]]()
     var contentSize : CGSize!
-    var dataSource: CustomGridViewLayoutDataSource!
+    var dataSource: GridViewLayoutDataSource!
     let sizeCache = NSCache()
 
 
