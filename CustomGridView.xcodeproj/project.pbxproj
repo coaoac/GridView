@@ -10,6 +10,11 @@
 		632E1B441AF665230080150C /* CustomGridView.h in Headers */ = {isa = PBXBuildFile; fileRef = 632E1B431AF665230080150C /* CustomGridView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		632E1B4A1AF665230080150C /* CustomGridView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 632E1B3E1AF665230080150C /* CustomGridView.framework */; };
 		632E1B511AF665230080150C /* CustomGridViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632E1B501AF665230080150C /* CustomGridViewTests.swift */; };
+		632E1B621AF665E70080150C /* ContentGridViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 632E1B5B1AF665E70080150C /* ContentGridViewCell.xib */; };
+		632E1B651AF665E70080150C /* CustomGridViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632E1B5E1AF665E70080150C /* CustomGridViewLayout.swift */; };
+		632E1B661AF665E70080150C /* CustomGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632E1B5F1AF665E70080150C /* CustomGridViewController.swift */; };
+		632E1B671AF665E70080150C /* CollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 632E1B601AF665E70080150C /* CollectionViewController.xib */; };
+		632E1B691AF69AF30080150C /* TitleGridViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 632E1B681AF69AF30080150C /* TitleGridViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +34,11 @@
 		632E1B491AF665230080150C /* CustomGridViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CustomGridViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		632E1B4F1AF665230080150C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		632E1B501AF665230080150C /* CustomGridViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGridViewTests.swift; sourceTree = "<group>"; };
+		632E1B5B1AF665E70080150C /* ContentGridViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentGridViewCell.xib; sourceTree = "<group>"; };
+		632E1B5E1AF665E70080150C /* CustomGridViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGridViewLayout.swift; sourceTree = "<group>"; };
+		632E1B5F1AF665E70080150C /* CustomGridViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGridViewController.swift; sourceTree = "<group>"; };
+		632E1B601AF665E70080150C /* CollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewController.xib; sourceTree = "<group>"; };
+		632E1B681AF69AF30080150C /* TitleGridViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleGridViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +82,8 @@
 			isa = PBXGroup;
 			children = (
 				632E1B431AF665230080150C /* CustomGridView.h */,
+				632E1B6B1AF69C520080150C /* Classes */,
+				632E1B6A1AF69C460080150C /* Xibs */,
 				632E1B411AF665230080150C /* Supporting Files */,
 			);
 			path = CustomGridView;
@@ -100,6 +112,25 @@
 				632E1B4F1AF665230080150C /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		632E1B6A1AF69C460080150C /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				632E1B5B1AF665E70080150C /* ContentGridViewCell.xib */,
+				632E1B681AF69AF30080150C /* TitleGridViewCell.xib */,
+				632E1B601AF665E70080150C /* CollectionViewController.xib */,
+			);
+			name = Xibs;
+			sourceTree = "<group>";
+		};
+		632E1B6B1AF69C520080150C /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				632E1B5F1AF665E70080150C /* CustomGridViewController.swift */,
+				632E1B5E1AF665E70080150C /* CustomGridViewLayout.swift */,
+			);
+			name = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,6 +223,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				632E1B671AF665E70080150C /* CollectionViewController.xib in Resources */,
+				632E1B691AF69AF30080150C /* TitleGridViewCell.xib in Resources */,
+				632E1B621AF665E70080150C /* ContentGridViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +243,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				632E1B661AF665E70080150C /* CustomGridViewController.swift in Sources */,
+				632E1B651AF665E70080150C /* CustomGridViewLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,6 +359,7 @@
 		632E1B551AF665230080150C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -332,12 +369,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		632E1B561AF665230080150C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
