@@ -65,13 +65,26 @@ public class GridViewController: UICollectionViewController {
 
         switch (row, column) {
         case (0..<dataSource.numberOfColumnTitles(), 0..<dataSource.numberOfRowTitles()):
-            return dataSource.cornerCell(indexPath: indexPath)
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(dataSource.contentCellID(), forIndexPath: indexPath)
+                as! ContentGridViewCell
+            dataSource.configureCornerCell(cell, cornerColumnNumber: column, cornerRowNumner: row)
+            return cell
+
         case (_, 0..<dataSource.numberOfRowTitles()):
-            return dataSource.rowTitleCell(titleCellNumber: column, rowIndex: row - dataSource.numberOfColumnTitles(), indexPath: indexPath)
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(dataSource.titleCellID(), forIndexPath: indexPath)
+                as! TitleGridViewCell
+            dataSource.configureRowTitleCell(cell, rowtitleCellNumber: column, rowIndex: row - dataSource.numberOfColumnTitles())
+            return cell
+
         case (0..<dataSource.numberOfColumnTitles(), _):
-            return dataSource.columnTitleCell(titleCellNumber: row, columnIndex: column - dataSource.numberOfRowTitles(), indexPath: indexPath)
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(dataSource.titleCellID(), forIndexPath: indexPath) as! TitleGridViewCell
+            dataSource.configureColumnTitleCell(cell, columnTitleCellNumber: row, columnIndex: column - dataSource.numberOfRowTitles())
+            return cell
+
         default:
-            return dataSource.contentCell(columnIndex: column - dataSource.numberOfColumnTitles(), rowIndex: row - dataSource.numberOfColumnTitles(), indexPath: indexPath)
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(dataSource.contentCellID(), forIndexPath: indexPath) as! ContentGridViewCell
+            dataSource.configureContentCell(cell, columnIndex: column - dataSource.numberOfColumnTitles(), rowIndex: row - dataSource.numberOfColumnTitles())
+            return cell
 
         }
     }
