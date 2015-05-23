@@ -5,7 +5,6 @@
 import UIKit
 
 //Section = row, item = column
-
 public class ContentGridViewCell: UICollectionViewCell {
     @IBOutlet public weak var contentLabel: UILabel!
 
@@ -25,9 +24,11 @@ public class TitleGridViewCell: UICollectionViewCell {
     }
 }
 
+
+
 public class GridViewController: UICollectionViewController {
-    let titleCellIdentifier = "TitleCellIdentifier"
-    let contentCellIdentifier = "ContentCellIdentifier"
+//    let titleCellIdentifier = "TitleCellIdentifier"
+//    let contentCellIdentifier = "ContentCellIdentifier"
 
     public var dataSource: GridViewLayoutDataSource!
 
@@ -65,8 +66,7 @@ public class GridViewController: UICollectionViewController {
 
         switch (row, column) {
         case (0..<dataSource.numberOfColumnTitles(), 0..<dataSource.numberOfRowTitles()):
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(dataSource.contentCellID(), forIndexPath: indexPath)
-                as! ContentGridViewCell
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(dataSource.contentCellID(), forIndexPath: indexPath) as! ContentGridViewCell
             dataSource.configureCornerCell(cell, cornerColumnNumber: column, cornerRowNumner: row)
             return cell
 
