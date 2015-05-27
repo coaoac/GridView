@@ -5,25 +5,6 @@
 import UIKit
 
 //Section = row, item = column
-public class ContentGridViewCell: UICollectionViewCell {
-    @IBOutlet public weak var contentLabel: UILabel!
-
-    override public func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-}
-
-public class TitleGridViewCell: UICollectionViewCell {
-    @IBOutlet public weak var contentLabel: UITextField!
-
-    override public func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-}
-
 
 
 public class GridViewController: UICollectionViewController {
@@ -33,8 +14,9 @@ public class GridViewController: UICollectionViewController {
     public var dataSource: GridViewLayoutDataSource!
 
 
-    @IBOutlet weak var layout: GridViewLayout!
+    //@IBOutlet weak var layout: GridViewLayout!
 
+    weak var layout: GridViewLayout!
 
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +26,6 @@ public class GridViewController: UICollectionViewController {
         layout.dataSource = dataSource
 
     }
-
 
     // MARK - UICollectionViewDataSource
 
@@ -66,25 +47,16 @@ public class GridViewController: UICollectionViewController {
 
         switch (row, column) {
         case (0..<dataSource.numberOfColumnTitles(), 0..<dataSource.numberOfRowTitles()):
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(dataSource.contentCellID(), forIndexPath: indexPath) as! ContentGridViewCell
-            dataSource.configureCornerCell(cell, cornerColumnNumber: column, cornerRowNumner: row)
-            return cell
+            return dataSource.cornerCellForIndexPath(indexPath, cornerColumnIndex: column, cornerRowIndex: row)
 
         case (_, 0..<dataSource.numberOfRowTitles()):
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(dataSource.titleCellID(), forIndexPath: indexPath)
-                as! TitleGridViewCell
-            dataSource.configureRowTitleCell(cell, rowtitleCellNumber: column, rowIndex: row - dataSource.numberOfColumnTitles())
-            return cell
+            return dataSource.rowTitleCellForIndexPath(indexPath, rowtitleCellIndex: column, rowIndex: row - dataSource.numberOfColumnTitles())
 
         case (0..<dataSource.numberOfColumnTitles(), _):
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(dataSource.titleCellID(), forIndexPath: indexPath) as! TitleGridViewCell
-            dataSource.configureColumnTitleCell(cell, columnTitleCellNumber: row, columnIndex: column - dataSource.numberOfRowTitles())
-            return cell
+            return dataSource.columnTitleCellForIndexPath(indexPath, columnTitleCellIndex: row, columnIndex: column - dataSource.numberOfRowTitles())
 
         default:
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(dataSource.contentCellID(), forIndexPath: indexPath) as! ContentGridViewCell
-            dataSource.configureContentCell(cell, columnIndex: column - dataSource.numberOfColumnTitles(), rowIndex: row - dataSource.numberOfColumnTitles())
-            return cell
+            return dataSource.contentCellForIndexPath(indexPath, columnIndex: column - dataSource.numberOfRowTitles(), rowIndex: row - dataSource.numberOfColumnTitles())
 
         }
     }
