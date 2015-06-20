@@ -24,13 +24,13 @@ public class GridViewLayout: UICollectionViewLayout {
 
         if (self.itemAttributes.count > 0){
             for row in 0..<self.collectionView!.numberOfSections() {
-                var numberOfColumns : Int = self.collectionView!.numberOfItemsInSection(row)
+                let numberOfColumns : Int = self.collectionView!.numberOfItemsInSection(row)
                 for column in 0..<numberOfColumns {
                     if row >= dataSource.numberOfColumnTitles() && column >= dataSource.numberOfRowTitles() {
                         continue
                     }
 
-                    var attributes : UICollectionViewLayoutAttributes = self.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: column, inSection: row))
+                    let attributes : UICollectionViewLayoutAttributes = self.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: column, inSection: row))!
 
                     if row < dataSource.numberOfColumnTitles() {
                         var frame = attributes.frame
@@ -58,13 +58,13 @@ public class GridViewLayout: UICollectionViewLayout {
 
         for section in 0..<self.collectionView!.numberOfSections() {
             var sectionAttributes = [UICollectionViewLayoutAttributes]()
-            var numberOfItems : Int = self.collectionView!.numberOfItemsInSection(section)
+            let numberOfItems : Int = self.collectionView!.numberOfItemsInSection(section)
             for index in 0..<numberOfItems {
 
-                var itemSize = self.sizeOfItemAtIndexPath(NSIndexPath(forRow: index, inSection: section))
+                let itemSize = self.sizeOfItemAtIndexPath(NSIndexPath(forRow: index, inSection: section))
 
-                var indexPath = NSIndexPath(forItem: index, inSection: section)
-                var attributes = UICollectionViewLayoutAttributes(forCellWithIndexPath: indexPath)
+                let indexPath = NSIndexPath(forItem: index, inSection: section)
+                let attributes = UICollectionViewLayoutAttributes(forCellWithIndexPath: indexPath)
                 attributes.frame = CGRectIntegral(CGRectMake(xOffset, yOffset, itemSize.width, itemSize.height))
 
                 if section < dataSource.numberOfColumnTitles() && index < dataSource.numberOfRowTitles() {
@@ -107,7 +107,7 @@ public class GridViewLayout: UICollectionViewLayout {
             self.itemAttributes.append(sectionAttributes)
         }
 
-        var attributes : UICollectionViewLayoutAttributes = self.itemAttributes.last!.last!
+        let attributes : UICollectionViewLayoutAttributes = self.itemAttributes.last!.last!
         contentHeight = attributes.frame.origin.y + attributes.frame.size.height
         self.contentSize = CGSizeMake(contentWidth, contentHeight)
     }
@@ -116,21 +116,21 @@ public class GridViewLayout: UICollectionViewLayout {
         return self.contentSize
     }
 
-    override public func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes! {
+    override public func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
         return self.itemAttributes[indexPath.section][indexPath.row]
     }
 
-    override public func layoutAttributesForElementsInRect(rect: CGRect) -> [AnyObject]? {
-        var attributes : NSMutableArray = NSMutableArray()
+    override public func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+
+        var attributes = [UICollectionViewLayoutAttributes]()
+
+        //let attributes : NSMutableArray = NSMutableArray()
         for section in self.itemAttributes {
-            attributes.addObjectsFromArray(
-                section.filter({(attributes: UICollectionViewLayoutAttributes) -> Bool in
-                    return CGRectIntersectsRect(rect, attributes.frame)
-                })
-            )}
-
-
-    return attributes as [AnyObject]
+            attributes += section.filter({(attributes: UICollectionViewLayoutAttributes) -> Bool in
+                return CGRectIntersectsRect(rect, attributes.frame)
+            })
+            }
+            return attributes
     }
 
     override public func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
